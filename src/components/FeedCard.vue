@@ -138,4 +138,3 @@ export default {
     text-align: center;
   }
 </style>
->>>>>>> origin/full:src/components/FeedCard.vue
