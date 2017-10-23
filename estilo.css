@@ -1,0 +1,107 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+    padding: 0px 10px;
+  }
+
+  div > header {
+    padding: 10px 5px;
+    text-align: center;
+  }
+
+  div > header > h1 {
+    letter-spacing: 3px;
+    font-size: 14pt;
+  }
+
+  div > header > input {
+    width: 60%;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    border-style: none;
+    border: 1px solid #41B883;
+    text-align: center;
+    color: #35495E;
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+    color: #727F80;
+  }
+
+  div > main {
+    margin: 0px 30px 15px 30px;
+    border-radius: 4px;
+    border: 1px solid #35495E;
+  }
+
+  div > main > header {
+    padding: 5px;
+    margin: 0px;
+    text-align: center;
+    background-color: #41B883;
+  }
+
+  div > main > header > nav:first-child {
+    float: right;
+  }
+
+  div > main > header > nav > h1 {
+    margin: 0px;
+    letter-spacing: 2px;
+    font-size: 15pt;
+  }
+
+  div > main > header > nav > h1 > a {
+    color: #fff;
+  }
+
+  div > main > header > nav > small {
+    color: #F6F6F6;
+    letter-spacing: 1px;
+  }
+
+  div > main > header > nav > button {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #35495E;
+    color: #35495E;
+    background-color: transparent;
+  }
+
+  div > main > header > nav > button:hover, div > main > header > nav > button:target {
+    color: #fff;
+    background-color: #35495E;
+  }
+
+  div > main > section  {
+    margin: 0px;
+    list-style: none;
+  }
+
+  div > main > section > article {
+    padding: 5px 20px;
+    margin: 0px;
+    border-bottom: 1px solid #000;
+  }
+
+  div > main > section > article > h2 {
+    text-align: center;
+    margin: 0px;
+    font-size: 12pt;
+    letter-spacing: 1px;
+  }
+
+  div > main > section > article > h2 > a {
+    color: #35495E;
+  }
+
+  div > main > section > article > div {
+    font-size: 10pt;
+  }
+
+  div > main > small {
+    text-align: center;
+  }
