@@ -7,40 +7,18 @@
     </header>
 
     <main v-for="(feed, key) in feeds" :key="key">
-      <header>
-        <nav>
-          <button @click="remove(key)">Remover</button>
-        </nav>
-
-        <nav>
-          <h1>
-            <a :href="feed.url" target="_blank">
-              {{ feed.title | cortar(50) }}
-            </a>
-          </h1>
-          <small>{{ feed.description }}</small>
-        </nav>
-      </header>
-
-      <section>
-        <article v-for="item in feed.items" :key="item.created">
-            <h2>
-              <a :href="item.url" target="_blank">
-                {{ item.title | cortar(50) }}
-              </a>
-            </h2>
-            <div v-html="item.description"></div>
-        </article>
-      </section>
+      <feed-card :feed="feed" :key="key" @remove="remove" />
     </main>
   </div>
 </template>
 
 <script>
 import Noticias from './externos/noticias'
+import FeedCard from './componentes/FeedCard.vue'
 
 export default {
   name: 'app',
+  components: { FeedCard },
   data: () => ({
     url: 'blog.caelum.com.br/feed',
     feeds: [],
@@ -148,80 +126,5 @@ export default {
   a {
     text-decoration: none;
     color: #727F80;
-  }
-
-  div > main {
-    margin: 0px 30px 15px 30px;
-    border-radius: 4px;
-    border: 1px solid #35495E;
-  }
-
-  div > main > header {
-    padding: 5px;
-    margin: 0px;
-    text-align: center;
-    background-color: #41B883;
-  }
-
-  div > main > header > nav:first-child {
-    float: right;
-  }
-
-  div > main > header > nav > h1 {
-    margin: 0px;
-    letter-spacing: 2px;
-    font-size: 15pt;
-  }
-
-  div > main > header > nav > h1 > a {
-    color: #fff;
-  }
-
-  div > main > header > nav > small {
-    color: #F6F6F6;
-    letter-spacing: 1px;
-  }
-
-  div > main > header > nav > button {
-    padding: 4px;
-    border-radius: 4px;
-    border: 1px solid #35495E;
-    color: #35495E;
-    background-color: transparent;
-  }
-
-  div > main > header > nav > button:hover, div > main > header > nav > button:target {
-    color: #fff;
-    background-color: #35495E;
-  }
-
-  div > main > section  {
-    margin: 0px;
-    list-style: none;
-  }
-
-  div > main > section > article {
-    padding: 5px 20px;
-    margin: 0px;
-    border-bottom: 1px solid #000;
-  }
-
-  div > main > section > article > h2 {
-    text-align: center;
-    margin: 0px;
-    font-size: 12pt;
-    letter-spacing: 1px;
-  }
-
-  div > main > section > article > h2 > a {
-    color: #35495E;
-  }
-
-  div > main > section > article > div {
-    font-size: 10pt;
-  }
-
-  div > main > small {
-    text-align: center;
   }
 </style>
