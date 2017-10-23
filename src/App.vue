@@ -116,39 +116,3 @@ export default {
   }
 }
 </script>
-
-
-<style>
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0px;
-    padding: 0px 10px;
-  }
-
-  div > header {
-    padding: 10px 5px;
-    text-align: center;
-  }
-
-  div > header > h1 {
-    letter-spacing: 3px;
-    font-size: 14pt;
-  }
-
-  div > header > input {
-    width: 60%;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 4px;
-    border-style: none;
-    border: 1px solid #41B883;
-    text-align: center;
-    color: #35495E;
-    font-weight: bold;
-  }
-
-  a {
-    text-decoration: none;
-    color: #727F80;
-  }
-</style>
