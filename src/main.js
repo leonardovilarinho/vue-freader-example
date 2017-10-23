@@ -1,28 +1,35 @@
 import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 import App from './App.vue'
-// import Painel from './componentes/Painel.vue'
-// import ProdutoLista from './componentes/ProdutoLista.vue'
-// import ProdutoNovo from './componentes/ProdutoNovo.vue'
 
-// Vue.use(VueRouter)
+Vue.use(Vuex)
 
-// const router = new VueRouter({
-//   routes: [
-//     { path: '/', component: Painel },
-//     {
-//       path: '/produtos',
-//       component: ProdutoLista,
-//       children: [
-//         { path: 'novo', component: ProdutoNovo }
-//       ]
-//     },
-//   ]
-// })
+const store = new Vuex.Store({
+  state: {
+    urls: []
+  },
+  mutations: {
+    'ADD_URL': function(state, url) {
+      const id = state.urls.indexOf(url)
+      if(id < 0)
+        state.urls.unshift(url)
+    },
+    'REMOVE_URL': function (state, id) {
+      state.urls.splice(id, 1)
+    }
+  },
+  getters: {
+    getUrls(state) {
+      return state.urls
+    }
+  },
+  plugins: [createPersistedState()]
+})
 
 new Vue({
   el: '#app',
   render: h => h(App),
-  // router: router
+  store: store
 })

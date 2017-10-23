@@ -46,6 +46,23 @@ export default {
     feeds: [],
     loading: false
   }),
+  mounted() {
+    
+    const urls = this.$store.getters.getUrls
+    for (let url of urls) {
+      this.loading = true
+      Noticias.adicionarFeed(url).then(resultado => {
+        let feed = resultado.data
+        feed.title = feed.title == '' ? url : feed.title
+        feed.description = feed.description == '' ? '...' : feed.description
+        feed.items = resultado.data.items.splice(0, 5)
+        this.feeds.unshift(feed)
+        this.loading = false
+      }).catch(erro => {
+        this.loading = false
+      })
+    }
+  },
   methods: {
     search(e) {
       if(e.keyCode == 13)
@@ -53,21 +70,32 @@ export default {
     },
     registrarFeed() {
       this.loading = true
-      Noticias.adicionarFeed(this.urlFormatada).then(resultado => {
-        let feed = resultado.data
-        feed.title = feed.title == '' ? this.url : feed.title
-        feed.description = feed.description == '' ? '...' : feed.description
-        feed.items = resultado.data.items.splice(0, 5)
-        this.feeds.unshift(feed)
-        this.loading = false
-      }).catch(erro => {
+
+      if(this.$store.getters.getUrls.indexOf(this.urlFormatada) < 0) {
+         Noticias.adicionarFeed(this.urlFormatada).then(resultado => {
+          this.$store.commit('ADD_URL', this.urlFormatada)
+          let feed = resultado.data
+          feed.title = feed.title == '' ? this.url : feed.title
+          feed.description = feed.description == '' ? '...' : feed.description
+          feed.items = resultado.data.items.splice(0, 5)
+          this.feeds.unshift(feed)
+          this.loading = false
+        }).catch(erro => {
+          this.loading = false
+          const oldurl = this.url
+          this.url = 'Fonte de notícia invalida.'
+          setTimeout(() => this.url = oldurl, 1300)
+        })
+      }
+      else {
         this.loading = false
         const oldurl = this.url
-        this.url = 'Fonte de notícia invalida.'
+        this.url = 'Fonte já cadastrada.'
         setTimeout(() => this.url = oldurl, 1300)
-      })
+      }
     },
     remove(id) {
+      this.$store.commit('REMOVE_URL', id)
       this.feeds.splice(id, 1)
     }
   },
