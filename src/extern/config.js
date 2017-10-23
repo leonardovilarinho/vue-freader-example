@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const http = axios.create({
-    baseURL: 'https://morning-earth-19323.herokuapp.com/',
+    baseURL: 'http://iftmvue.azurewebsites.net',
     timeout: 10000
 })
