@@ -3,14 +3,14 @@
       <header>
         <nav>
             <!-- Botão para remover o item -->
-            <button @click="remove(key)">Remover</button>
+            <button @click="remove">Remover</button>
         </nav>
 
         <nav>
             <!-- titulo do site e link para ir para o mesmo -->
             <h1>
                 <a :href="feed.url" target="_blank">
-                    {{ feed.title | cortar(50) }}
+                    {{ feed.title | crop(50) }}
                 </a>
             </h1>
             <!-- descrição do site -->
@@ -24,7 +24,7 @@
             <h2>
                 <!-- Mostra titulo da postagem -->
                 <a :href="item.url" target="_blank">
-                    {{ item.title | cortar(50) }}
+                    {{ item.title | crop(50) }}
                 </a>
             </h2>
             <!-- Mostra resumo da postagem em html -->
@@ -35,29 +35,31 @@
 </template>
 
 <script>
-    export default {
-        name: 'FeedCard',
-        // propriedades extrenar, parametros que devemos receber para montar esse componente
-        props: {
-            // objeto do site, contem informações do site e a lista de noticias do mesmo
-            feed: {
-                required: true,
-                type: Object,
-                default: {}
-            },
-            // chave do vuex
-            key: {
-                required: true,
-                type: Number
-            }
+import mixin from './mixin'
+export default {
+    name: 'FeedCard',
+    mixins: [mixin],
+    // propriedades extrenar, parametros que devemos receber para montar esse componente
+    props: {
+        // objeto do site, contem informações do site e a lista de noticias do mesmo
+        feed: {
+            required: true,
+            type: Object,
+            default: {}
         },
-        methods:{
-            // metodo remove emite uma notificação para remover um item, passando key como parametro
-            remove(key) {
-                this.$emit('removeNotify', key)
-            }
+        // chave do vuex
+        id: {
+            required: true,
+            type: Number
+        }
+    },
+    methods:{
+        // metodo remove emite uma notificação para remover um item, passando key como parametro
+        remove() {
+            this.$emit('removeNotify', this.id)
         }
     }
+}
 </script>
 
 <style>

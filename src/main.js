@@ -21,7 +21,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // State armazena e declara os dados padrões da loja, no caso um array de urls do feed
   state: {
-    urls: []
+    querys: []
   },
   /**
    * Mutations são métodos que podem alterar o valor do state da loja
@@ -30,16 +30,16 @@ const store = new Vuex.Store({
     /**
      * Adiciona uma url defeed na nossa loja
      */
-    'ADD_URL': function(state, url) {
-      const id = state.urls.indexOf(url)
+    'ADD_QUERY': function(state, query) {
+      const id = state.querys.indexOf(query.toLowerCase())
       if(id < 0)
-        state.urls.unshift(url)
+        state.querys.unshift(query.toLowerCase())
     },
     /**
      * Remove um URL de feed da nossa loja
      */
-    'REMOVE_URL': function (state, id) {
-      state.urls.splice(id, 1)
+    'REMOVE_QUERY': function (state, id) {
+      state.querys.splice(id, 1)
     }
   },
   /**
@@ -49,8 +49,8 @@ const store = new Vuex.Store({
     /**
      * Método recupera o array de urls da loja
      */
-    getUrls(state) {
-      return state.urls
+    getQuerys(state) {
+      return state.querys
     }
   },
   // Registra o plugin para salvar o array de urls no navegador
